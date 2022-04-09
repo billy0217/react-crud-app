@@ -5,13 +5,13 @@ import HorseList from "../components/HorseList";
 
 const Horse = () => {
 	let params = useParams();
-	
+
 	return (
 		<div className="container">
 			<div className="row">
 				{ 
 					params.id ? 
-						<HorseDetail id={params.id}/>
+						<HorseDetail id={params.id} editable={true}/>
 					: <HorseList />
 				}
 			</div>
