@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const HorseDetail = (props) => {
-	console.log(props.id);
 
 	const [detail, setDetail] = useState([]);
 
@@ -14,14 +13,14 @@ const HorseDetail = (props) => {
 	const isEditable = props.editable;
 
 	const getDetails = async () => {
-		const data = await axios.get(`http://localhost:3016/horse/${props.id}`)
-								.then((res) => {
-									console.log(res.data);
-									setDetail(res.data);
-								})
-								.catch((err) => {
-									console.log(err.message);
-								})
+		await axios.get(`http://localhost:3016/horse/${props.id}`)
+					.then((res) => {
+						console.log(res.data);
+						setDetail(res.data);
+					})
+					.catch((err) => {
+						console.log(err.message);
+					})
 	}
 
 	return (
@@ -32,7 +31,12 @@ const HorseDetail = (props) => {
 						<div className="col-sm-8">
 							<h4>Name: {detail?.name}</h4>
 						</div>
-						{isEditable && <div className="col-sm-4"><Link to={'/'}>Back to list</Link><Link to={`/horse/edit/${detail.id}`}>Edit</Link></div>}
+						{isEditable && 
+							<div className="col-sm-4 d-flex flex-wrap align-items-center justify-content-center">
+								<Link to={'/'} className="px-2 me-3 link-dark px-2">Back to list</Link>
+								<Link to={`/horse/edit/${detail.id}`} className="px-2 btn btn-success">Edit</Link>
+							</div>
+						}
 					</div>
 					
 					<div className="table-responsive">

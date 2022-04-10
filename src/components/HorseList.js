@@ -1,8 +1,9 @@
 
-import react, { useState, useEffect }from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Pagination from "./Pagination";
+import AddCompareList from "./AddCompareList";
 
 const HorseList = () => {
 	
@@ -16,13 +17,13 @@ const HorseList = () => {
 	},[])
 
 	const getHouseList = async () => {
-		const data = await axios.get('http://localhost:3016/horse')
-								.then( (res) => {
-									setHorseList(res.data);
-								})
-								.catch((err) => {
-									setError(err.message);
-								})
+		await axios.get('http://localhost:3016/horse')
+					.then( (res) => {
+						setHorseList(res.data);
+					})
+					.catch((err) => {
+						setError(err.message);
+					})
 
 	}
 
@@ -44,7 +45,7 @@ const HorseList = () => {
 						<h2 className="display-4 mb-2">Horse List</h2>
 					</div>
 					<div className="col-sm-4">
-						<button>Add New</button>
+						<Link to={'/horse/add'} className="px-2 btn me-3 btn-info">Add New Horse</Link>
 					</div>
 				</div>
 				
@@ -57,19 +58,15 @@ const HorseList = () => {
 							return(
 								<li className="list-group-item" key={horse.id}>
 									<div className="row">
-										<div className="col-8">
-											{horse.name}
+										<div className="col-sm-12 col-md-6">
+											<h4 className="mt-2 mb-3 ">{horse.name}</h4>
 										</div>
-										<div className="col-4">
-											<Link to={`/horse/${horse.id}`} className="btn btn-success">
+										<div className="col-sm-12 col-md-6">
+											<Link to={`/horse/${horse.id}`} className="btn btn-primary mt-2 me-2 mb-2">
 												View Detail
 											</Link>
-											<button>
-												edit
-											</button>
-											<button>
-												compare
-											</button>
+											<Link to={`/horse/edit/${horse.id}`} className="px-2 btn me-2 mt-2 mb-2 btn-success" id={horse.id}>Edit</Link>
+											<AddCompareList id={horse.id} />
 										</div>
 									</div>
 									
