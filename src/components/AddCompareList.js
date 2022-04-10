@@ -5,9 +5,8 @@ const AddCompareList = (props) => {
 	const [compareList, setCompateList] = useState(false);
 
 	useEffect(()=>{
-		console.log(compareList)
 		checkCompareList();
-	},[compareList])
+	},[])
 
 	const checkCompareList = () => {
 		const check = localStorage.getItem('compareList');

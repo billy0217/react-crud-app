@@ -15,7 +15,6 @@ const HorseDetail = (props) => {
 	const getDetails = async () => {
 		await axios.get(`http://localhost:3016/horse/${props.id}`)
 					.then((res) => {
-						console.log(res.data);
 						setDetail(res.data);
 					})
 					.catch((err) => {
@@ -24,7 +23,7 @@ const HorseDetail = (props) => {
 	}
 
 	return (
-		<div className="container">
+		<div className="">
 			<div className="row">
 				<div className="col-sm-12">
 					<div className="row">
